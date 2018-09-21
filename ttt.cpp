@@ -19,7 +19,7 @@ int main ()
   int TIE =0;
   int in_game=1;
   int scorecount = 0;
-
+  
   char board [4][4];
     board [0][1] = '1';
     board [0][2] = '2';
@@ -33,7 +33,7 @@ int main ()
     bool playing = true;
 
     while (in_game ==1) {
-      scorecount = 0;
+      scorecount = 0;  
     // init and draw board
     for(int i = 0; i<4; i++){
       for(int j = 0; j<4; j++){
@@ -53,23 +53,23 @@ int main ()
     // start playing
     turn = XTURN;
     playing = true;
-
+    
     while (playing == true){
-
+    
       if (turn == XTURN) {
-        cout << "X's turn:" << endl;
+	cout << "X's turn:" << endl;
       }
       else {
-        cout << "O's turn: " << endl;
-      }
+	cout << "O's turn: " << endl;
+      }		
 
       //take input and check if valid
       cin >>input;
       if (input[0] != 'a' && input[0] != 'b' && input[0] != 'c'){
         cout<<"eligible rows are a,b,c"<<endl;
-    }
+      }
        if (input[1] != '1' && input[1] != '2' && input[1] != '3' ){
-        cout<<"eligible columns are 1,2,3"<<endl;
+	cout<<"eligible columns are 1,2,3"<<endl;
       }
 
        //read input and assign row/column
@@ -90,18 +90,19 @@ int main ()
           else {
             cout<<"invalid"<<endl;
           }
-    // draw the board and pieces
+
+	  // draw the board and pieces
          for(int i = 0; i<4; i++){
           for(int j = 0; j<4; j++){
 
             if(board [i][j] ==  XMOVE){
               board [i][j] = 'X';
-              scorecount++;
+	      scorecount++;
             }
             if (board [i][j] == OMOVE){
               board [i][j] = 'O';
-              scorecount++;
-                }
+	      scorecount++;
+		}
 
             board [0][1] = '1';
             board [0][2] = '2';
@@ -110,75 +111,76 @@ int main ()
             board [1][0] = 'a';
             board [2][0] = 'b';
             board [3][0] = 'c';
-
+	  
             cout << board [i][j] << " ";
-
+      
           }
           cout << endl;
         }
       }
 
-      // check row/columns
+      // check row/columns	 
       for (int a = 1; a<4; a++){
-
+	
         if (board[a][1] == 'X' && board[a][2] == 'X' && board[a][3] == 'X'){
           cout << "X WINS" << endl;
-          XSCORE++;
+	  XSCORE++;
           playing = false;
         }
         if (board[a][1] == 'O' && board[a][2] == 'O' && board[a][3] == 'O'){
           cout << "O WINS" << endl;
-          OSCORE++;
+	  OSCORE++;
           playing = false;
         }
-        if (board[1][a] == 'X' && board[2][a] == 'X' && board[3][a] == 'X'){
+	if (board[1][a] == 'X' && board[2][a] == 'X' && board[3][a] == 'X'){
           cout << "X WINS" << endl;
-          XSCORE++;
+	  XSCORE++;
           playing = false;
         }
-  if (board[1][a] == 'O' && board[2][a] == 'O' && board[3][a] == 'O'){
+        if (board[1][a] == 'O' && board[2][a] == 'O' && board[3][a] == 'O'){
           cout << "O WINS" << endl;
-          OSCORE++;
+	  OSCORE++;
           playing = false;
         }
       }
+	
+	// check diagonal
+	if (board[1][1] == 'X' && board[2][2] == 'X' && board[3][3] == 'X') {
+	  cout << "X WINS" << endl;
+	  XSCORE++;
+	  playing = false;
+	}
 
-        // check diagonal
-        if (board[1][1] == 'X' && board[2][2] == 'X' && board[3][3] == 'X') {
-          cout << "X WINS" << endl;
-          XSCORE++;
-          playing = false;
-        }
-
-        if (board[1][1] == 'O' && board[2][2] == 'O' && board[3][3] == 'O') {
+	if (board[1][1] == 'O' && board[2][2] == 'O' && board[3][3] == 'O') {
           cout << "O WINS" << endl;
-          OSCORE++;
+	  OSCORE++;
           playing = false;
         }
 
-         if (board[3][1] == 'X' && board[2][2] == 'X' && board[1][3] == 'X') {
+	 if (board[3][1] == 'X' && board[2][2] == 'X' && board[1][3] == 'X') {
           cout << "X WINS" << endl;
-          XSCORE++;
+	  XSCORE++;
           playing = false;
         }
 
         if (board[3][1] == 'O' && board[2][2] == 'O' && board[1][3] == 'O') {
           cout << "O WINS" << endl;
-          OSCORE++;
+	  OSCORE++;
           playing = false;
         }
 
-        // check for tie
-        if (scorecount == 9){
-          cout<< "TIE" << endl;
-          TIE++;
-          playing = false;
-        }
-
+	// check for tie
+	if (scorecount == 9){
+	  cout<< "TIE" << endl;
+	  TIE++;
+	  playing = false;
+	}
+ 
+      
     }  // end of while
 
      cout << "# X wins: " << XSCORE << ", # O wins: " << OSCORE << ", #Ties: " << TIE << endl << endl;
-
+    
      //play again
      cout << "Play again (y/n)?" << endl;
      cin >> input;
@@ -189,7 +191,7 @@ int main ()
      else {
       in_game =0;
      }
-
+      
     }
       return 998;
 }
